@@ -1,0 +1,20 @@
+# Test PO file for escaping behavior
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. String with quotes
+msgid "She said \"hello\""
+msgstr ""
+
+#. String with backslashes
+msgid "path\\to\\file"
+msgstr ""
+
+#. String with both quotes and backslashes
+msgid "Click \"OK\" or press \\n"
+msgstr ""
+
+#. Plain text without special characters
+msgid "Hello world"
+msgstr ""

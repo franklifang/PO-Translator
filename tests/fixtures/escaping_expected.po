@@ -1,0 +1,21 @@
+# Test PO file for escaping behavior
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh\n"
+
+#. String with quotes
+msgid "She said \"hello\""
+msgstr "她说\"你好\""
+
+#. String with backslashes
+msgid "path\\to\\file"
+msgstr "路径\\到\\文件"
+
+#. String with both quotes and backslashes
+msgid "Click \"OK\" or press \\n"
+msgstr "点击\"确定\"或按\\n"
+
+#. Plain text without special characters
+msgid "Hello world"
+msgstr "你好世界"
