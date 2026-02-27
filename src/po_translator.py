@@ -41,6 +41,75 @@ __author__ = "LI, Fang (黎昉)"
 __organization__ = "Zokin Design, LLC. (上海左晶多媒体设计有限公司)"
 
 
+def sanitize_po_file(input_path: str, output_path: str) -> None:
+    """
+    Pre-process a PO file to escape unescaped double quotes inside
+    msgid, msgstr, and msgctxt string values.
+
+    Some PO files in the wild contain unescaped inner quotes, e.g.:
+        msgctxt "Colloquial alternative to "learn about BuddyPress""
+    This is invalid per the GNU gettext spec and causes parsers like
+    polib to reject the file. This function rewrites such lines as:
+        msgctxt "Colloquial alternative to \\"learn about BuddyPress\\""
+
+    Args:
+        input_path: Path to the (possibly malformed) PO file
+        output_path: Path to write the sanitized PO file
+    """
+    # Matches lines like: msgid "...", msgstr "...", msgctxt "...",
+    # or continuation lines that start with "
+    keyword_pattern = re.compile(r'^((?:msgid|msgstr|msgctxt)(?:\[\d+\])?\s+)"(.*)"\s*$')
+    continuation_pattern = re.compile(r'^"(.*)"\s*$')
+
+    with open(input_path, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
+    sanitized = []
+    for line in lines:
+        keyword_match = keyword_pattern.match(line)
+        cont_match = continuation_pattern.match(line)
+
+        if keyword_match:
+            prefix = keyword_match.group(1)
+            content = keyword_match.group(2)
+            content = _escape_inner_quotes(content)
+            sanitized.append(f'{prefix}"{content}"\n')
+        elif cont_match:
+            content = cont_match.group(1)
+            content = _escape_inner_quotes(content)
+            sanitized.append(f'"{content}"\n')
+        else:
+            sanitized.append(line)
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.writelines(sanitized)
+
+
+def _escape_inner_quotes(content: str) -> str:
+    """
+    Escape any unescaped double quotes in a PO string value.
+    Already-escaped quotes (\\") are left untouched.
+    """
+    result = []
+    i = 0
+    while i < len(content):
+        if content[i] == '\\':
+            # Escaped sequence — keep as-is (e.g. \\", \\n, \\t)
+            result.append(content[i])
+            if i + 1 < len(content):
+                result.append(content[i + 1])
+                i += 2
+            else:
+                i += 1
+        elif content[i] == '"':
+            result.append('\\"')
+            i += 1
+        else:
+            result.append(content[i])
+            i += 1
+    return ''.join(result)
+
+
 class POTranslator:
     """Handles PO file translation using cloud AI APIs"""
 
@@ -235,9 +304,16 @@ Translations:"""
             Dictionary with translation statistics
         """
         self.should_stop = False
-        
-        # Load the PO file
-        po = polib.pofile(input_file)
+
+        # Sanitize the PO file to fix unescaped quotes before loading
+        import tempfile
+        fd, sanitized_path = tempfile.mkstemp(suffix=".po")
+        os.close(fd)
+        try:
+            sanitize_po_file(input_file, sanitized_path)
+            po = polib.pofile(sanitized_path)
+        finally:
+            os.unlink(sanitized_path)
 
         stats = {
             "total": len(po),

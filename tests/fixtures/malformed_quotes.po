@@ -1,0 +1,17 @@
+# Test PO file with unescaped inner quotes
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. Properly escaped quotes - should be unchanged
+msgid "Built with %1$s by <a href=\"%2$s\">%3$d volunteers</a>."
+msgstr ""
+
+#. Unescaped inner quotes in msgctxt
+msgctxt "Colloquial alternative to "learn about BuddyPress""
+msgid "Hello, BuddyPress!"
+msgstr ""
+
+#. Plain text - no quotes
+msgid "Hello world"
+msgstr ""
