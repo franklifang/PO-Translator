@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/franklifang/po-translator)
 [![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/)
 
-**PO Translator** is an for translating .PO (Portable Object) files using cloud-based AI language models. It provides a user-friendly interface for batch translation with support for multiple AI providers.
+**PO Translator** is an application for translating .PO (Portable Object) files using cloud-based AI language models. It provides a user-friendly interface for batch translation with support for multiple AI providers.
 
 **PO翻译器**是一个用于翻译.PO文件的Windows应用程序，使用云端AI大语言模型进行翻译。提供友好的用户界面，支持批量翻译和多个AI提供商。
 
