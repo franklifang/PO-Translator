@@ -12,7 +12,7 @@
 
 ## Getting Started (快速开始)
 
-PO Translator is a application for translating .PO (Portable Object) files using cloud-based AI language models. This guide will help you get started quickly.
+PO Translator is an application for translating .PO (Portable Object) files using cloud-based AI language models. This guide will help you get started quickly.
 
 PO翻译器是一个用于翻译.PO文件的Windows应用程序，使用云端AI大语言模型进行翻译。本指南将帮助您快速上手。
 

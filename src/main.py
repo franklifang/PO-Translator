@@ -1,6 +1,6 @@
 """
 PO Translator (PO翻译器) - Windows GUI Application
-A application for translating .PO files using cloud AI APIs
+An application for translating .PO files using cloud AI APIs
 
 Copyright (C) 2026 LI, Fang (黎昉)
 Copyright (C) 2026 Zokin Design, LLC. (上海左晶多媒体设计有限公司)

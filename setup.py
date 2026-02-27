@@ -1,6 +1,6 @@
 """
 PO Translator (PO翻译器) - Setup Configuration
-A application for translating .PO files using cloud AI APIs
+An application for translating .PO files using cloud AI APIs
 
 Copyright (C) 2026 LI, Fang (黎昉)
 Copyright (C) 2026 Zokin Design, LLC. (上海左晶多媒体设计有限公司)
@@ -21,7 +21,7 @@ setup(
     version="1.0.0",
     author="LI, Fang (黎昉)",
     author_email="support@zokin.com",
-    description="A application for translating .PO files using cloud AI APIs",
+    description="An application for translating .PO files using cloud AI APIs",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/franklifang/po-translator",
