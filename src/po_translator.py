@@ -345,11 +345,6 @@ Translations:"""
                             # Apply translations
                             for idx, translation in zip(batch_indices, translations):
                                 entry = po[idx]
-                                
-                                # Escape quotes for PO format
-                                translation = translation.replace('\\', '\\\\')
-                                translation = translation.replace('"', '\\"')
-                                
                                 entry.msgstr = translation
 
                     except Exception as e:
